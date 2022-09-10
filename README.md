@@ -19,3 +19,4 @@ Tarefas:
 - [Playlist Youtube - Curso Solidity](https://www.youtube.com/watch?v=cl798DOaqHc&list=PLjgFDMgJ1mGdEkm27LO_tgbf0riiN_Cxk);
 - [Solidity By Example](https://solidity-by-example.org/);
 - [OpenZeppelin ERC1155](https://docs.openzeppelin.com/contracts/3.x/erc1155);
+- [OppenZeppelin Wizard](https://wizard.openzeppelin.com/#erc1155);
