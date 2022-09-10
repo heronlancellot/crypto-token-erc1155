@@ -20,19 +20,33 @@ contract RealEstate is ERC1155 {
     uint256 public constant APART202 = 2;
     uint256 public constant APART303 = 3;
 
+    //strings sao informacoes extras para adicionar nas funcoes _mint e no _safeTransferFrom
+    string  public constant brand = "https://www.condominioeren.com.br/metadata.json";
+    string public constant brandApart = "Voce eh dono de um ape";
+
     constructor() ERC1155("https://game.example/api/item/{id}.json") {
         _mint(msg.sender, EREN, 10**18, "");
-        _mint(msg.sender, APART101, 1, "");
-        _mint(msg.sender, APART202, 1, "");
-        _mint(msg.sender, APART303, 1, "");
-       
     }
+
+    /*
+        @dev realiza mint de um apartamento;
+        @params to - endereco do remetente; apart - apartamento a ser mintado
+    */
+    function mintApart(address to, uint256 apart) public {
+        require(apart > 0 && apart < 3, "Apartamento nao existe");
+        bytes memory msgApart = bytes(brandApart);
+        _mint(to, apart, 1, msgApart);
+    }
+
     /*
         Realiza a transferencia da carteira onde houve mint para a carteira do cliente
         token e nft
+        @params from - endereco remetente, to - endereco da carteira de quem ira receber
+        amountToken - quantidade de token, apart - apartamento;
     */
     function transferApartEndToken(address from, address to, uint256 amountToken, uint256 apart) public {
-        _safeTransferFrom(from, to, 0, amountToken, "");
-        _safeTransferFrom(from, to, apart, 1, "");
+        bytes memory msgCond = bytes(brand);
+        _safeTransferFrom(from, to, 0, amountToken, msgCond);
+        _safeTransferFrom(from, to, apart, 1, msgCond);
     }
 }
